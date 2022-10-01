@@ -1,6 +1,5 @@
 using JixWebApi.Core.DTO;
 using JixWebApi.Core.Services;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JixWebApi.Controllers;

@@ -1,6 +1,5 @@
 using AutoWrapper;
 using JixWebApi.Core.Services;
-using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
 

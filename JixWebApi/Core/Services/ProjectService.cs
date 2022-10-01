@@ -1,5 +1,4 @@
 using JixWebApi.Core.DTO;
-using JixWebApi.Core.Entities;
 
 namespace JixWebApi.Core.Services;
 
