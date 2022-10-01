@@ -1,4 +1,6 @@
+using AutoWrapper;
 using JixWebApi.Core.Services;
+using Microsoft.OpenApi.Models;
 using NLog;
 using NLog.Web;
 
@@ -12,10 +14,33 @@ public class Program {
 		try {
 			var builder = WebApplication.CreateBuilder(args);
 
+			// NLog: Setup NLog for Dependency injection
+			builder.Logging.ClearProviders();
+			builder.Host.UseNLog();
+
+			// Swagger
+			builder.Services.AddSwaggerGen();
+
+			// CORS
+			builder.Services.AddCors(options => {
+				options.AddDefaultPolicy(policy => {
+					policy
+					.AllowAnyOrigin()
+					.AllowAnyHeader()
+					.AllowAnyMethod();
+				});
+			});
+
+			// Auth
+			// Data
+
 			// Add services to the container.
 			builder.Services.AddRazorPages();
+			builder.Services.AddControllers();
+			builder.Services.AddEndpointsApiExplorer();
 
-			// Custom Services
+			// Add custom Options
+			// Add custom Services
 			builder.Services.AddScoped<IProjectService, ProjectService>();
 
 			var app = builder.Build();
@@ -30,11 +55,18 @@ public class Program {
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
+			if (!app.Environment.IsProduction()) {
+				app.UseSwagger();
+				app.UseSwaggerUI();
+			}
+
 			app.UseRouting();
-
+			app.UseCors();
 			app.UseAuthorization();
-
+			//app.UseAuthentication();
 			app.MapRazorPages();
+			app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsApiOnly = false });
+			app.MapControllers();
 
 			app.Run();
 		}
