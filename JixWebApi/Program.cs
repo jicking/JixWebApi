@@ -1,3 +1,5 @@
+using JixWebApi.Core.Services;
+
 namespace JixWebApi;
 public class Program {
 	public static void Main(string[] args) {
@@ -5,6 +7,9 @@ public class Program {
 
 		// Add services to the container.
 		builder.Services.AddRazorPages();
+
+		// Custom Services
+		builder.Services.AddScoped<IProjectService, ProjectService>();
 
 		var app = builder.Build();
 
