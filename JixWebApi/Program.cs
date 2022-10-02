@@ -54,10 +54,10 @@ public class Program {
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
-			if (!app.Environment.IsProduction()) {
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
+			//if (!app.Environment.IsProduction()) {
+			app.UseSwagger();
+			app.UseSwaggerUI();
+			//}
 
 			app.UseRouting();
 			app.UseCors();

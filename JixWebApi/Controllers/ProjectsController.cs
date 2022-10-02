@@ -1,6 +1,7 @@
 using JixWebApi.Core.DTO;
 using JixWebApi.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace JixWebApi.Controllers;
 
@@ -20,6 +21,7 @@ public class ProjectsController : ControllerBase {
 	// GET: api/<ProjectsController>
 	[HttpGet]
 	public IEnumerable<ProjectDto> Get() {
+		_logger.LogInformation("Fetch all projects");
 		return _projectService.GetAll();
 	}
 
@@ -29,9 +31,21 @@ public class ProjectsController : ControllerBase {
 		try {
 			// custom validation
 
-			var newProject = _projectService.Add(value);
-			_logger.LogInformation("Added new project");
-			return Ok(newProject);
+			var addResult = _projectService.Add(value);
+
+			if (addResult.IsError) {
+				throw addResult.Exception;
+			}
+
+			if (addResult.HasValidationError) {
+				foreach (var e in addResult.ValidationErrors) {
+					ModelState.AddModelError(e.Key, e.Value);
+				}
+				return BadRequest(ModelState);
+			}
+
+			_logger.LogInformation("Added new project ");
+			return Ok(addResult.Value);
 		}
 		catch (Exception ex) {
 			_logger.LogError(ex, "");
