@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Jicking",
+  "classifications": [ "Web", "WebAPI"],
+  "identity": "Jix.WebAPI",
+  "name": "Jix Web API Template",
+  "shortName": "jixwebapi",
+  "sourceName": "jixwebapi",
+  "preferNameDirectory":true,
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  }
+}

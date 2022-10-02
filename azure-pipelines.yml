@@ -15,6 +15,7 @@ variables:
 steps:
 # GitVersioning
 # Make sure you have disabled shallow fetch of git sources setting on azure devops
+# Edit Pipeline > Triggers > YAML > Get Sources > Shallow Fetch
 - task: DotNetCoreCLI@2  
   displayName: Install NBGV tool
   inputs:
