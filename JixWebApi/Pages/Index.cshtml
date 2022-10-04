@@ -14,5 +14,9 @@
 <div class="text-center">
     <h1 class="display-4">JixWebApi Template</h1>
     <p>A simple preconfigured Web API template.</p>
-    <p><small>V@(version)</small></p>
+    <div>
+        <div><strong>Version:</strong> @(version)</div>
+        <div><strong>App Name:</strong> @(Model.WebHostEnv.ApplicationName)</div>
+        <div><strong>Environment:</strong> @(Model.WebHostEnv.EnvironmentName)</div>
+    </div>
 </div>
