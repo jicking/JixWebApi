@@ -6,9 +6,11 @@
     ViewData["Title"] = "Home page";
 
     // get version
-    Assembly assembly = Assembly.GetExecutingAssembly();
-    FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-    string version = fileVersionInfo.ProductVersion;
+    string version = (ThisAssembly.Git.SemVer.Major + "." +
+    ThisAssembly.Git.SemVer.Minor + "." +
+    ThisAssembly.Git.Commits + "-" +
+    ThisAssembly.Git.Branch + "+" +
+    ThisAssembly.Git.Commit);
 }
 
 <div class="text-center">
