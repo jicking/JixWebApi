@@ -5,7 +5,7 @@
   "identity": "Jix.WebAPI",
   "name": "Jix Web API Template",
   "shortName": "jixwebapi",
-  "sourceName": "jixwebapi",
+  "sourceName": "JixWebApi",
   "preferNameDirectory":true,
   "tags": {
     "language": "C#",
