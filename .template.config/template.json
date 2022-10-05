@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "jicking",
+  "classifications": [ "Web", "WebAPI" ],
+  "identity": "JixWebApiSln",
+  "name": "Jix Web API Sln",
+  "shortName": "jixwebapi",
+  "sourceName": "JixWebApi",
+  "preferNameDirectory": true,
+  "tags": {
+    "language": "C#",
+    "type": "solution"
+  },
+  "guids": [
+    "5609B380-65E4-46FF-A010-7F911FCDDEF9",
+    "50BC042E-6EC5-4E99-A704-B5F848529063",
+    "BC8322C2-3548-44BE-946A-38FA323DBB3E"
+  ],
+  "primaryOutputs": [
+    {
+      "path": "JixWebApi.sln"
+    }
+  ]
+}
