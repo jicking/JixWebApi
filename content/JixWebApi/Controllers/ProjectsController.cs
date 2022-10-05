@@ -19,18 +19,18 @@ public class ProjectsController : ControllerBase {
 
 	// GET: api/<ProjectsController>
 	[HttpGet]
-	public IEnumerable<ProjectDto> Get() {
+	public async Task<IEnumerable<ProjectDto>> GetAsync() {
 		_logger.LogInformation("Fetch all projects");
-		return _projectService.GetAll();
+		return await _projectService.GetAllAsync();
 	}
 
 	// POST api/<ProjectsController>
 	[HttpPost]
-	public IActionResult Post([FromBody] ProjectDto value) {
+	public async Task<IActionResult> PostAsync([FromBody] ProjectDto value) {
 		try {
 			// custom validation
 
-			var addResult = _projectService.Add(value);
+			var addResult = await _projectService.AddAsync(value);
 
 			if (addResult.IsError) {
 				throw addResult.Exception;

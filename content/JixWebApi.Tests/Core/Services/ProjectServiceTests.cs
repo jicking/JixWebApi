@@ -30,7 +30,7 @@ public class ProjectServiceTests {
 			Name = "test",
 			Description = "test"
 		};
-		var result = _sut.Add(project);
+		var result = _sut.AddAsync(project).Result;
 
 		// check result states
 		Assert.True(result.IsSuccess);
@@ -49,8 +49,8 @@ public class ProjectServiceTests {
 			Name = "GetAllTest",
 			Description = "GetAllTest"
 		};
-		_sut.Add(project);
-		var result = _sut.GetAll();
+		_sut.AddAsync(project).Wait();
+		var result = _sut.GetAllAsync().Result;
 
 		Assert.NotEmpty(result);
 	}
