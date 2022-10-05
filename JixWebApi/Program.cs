@@ -1,5 +1,7 @@
 using AutoWrapper;
 using JixWebApi.Core.Services;
+using JixWebApi.Data;
+using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
@@ -31,7 +33,13 @@ public class Program {
 			});
 
 			// Auth
+
 			// Data
+			//var connectionString = builder.Configuration.GetConnectionString("JixWebApiDbContext");
+			//builder.Services.AddDbContext<JixWebApiDbContext>(options =>
+			//	options.UseSqlServer(connectionString));
+			builder.Services.AddDbContext<JixWebApiDbContext>(options =>
+				options.UseInMemoryDatabase("JixWebApiDbContext"));
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();

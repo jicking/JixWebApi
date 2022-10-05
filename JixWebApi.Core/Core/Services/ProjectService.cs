@@ -1,4 +1,6 @@
 using JixWebApi.Core.DTO;
+using JixWebApi.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace JixWebApi.Core.Services;
 
@@ -9,15 +11,22 @@ public interface IProjectService {
 
 public class ProjectService : IProjectService {
 
-	private static List<ProjectDto> _projects = new List<ProjectDto>();
+	private static JixWebApiDbContext _db;
+
+	public ProjectService(
+		JixWebApiDbContext dbContext
+		) {
+		_db = dbContext;
+	}
 
 	public Result<ProjectDto> Add(ProjectDto value) {
 
 		try {
 			// validation
 			var validationErrors = new List<KeyValuePair<string, string>>();
-			if (_projects.Select(p => p.Name).Contains(value.Name)) {
-				validationErrors.Add(new KeyValuePair<string, string>("name", "project name already exist on db."));
+			var existingProjectOnDB = _db.Projects.AsNoTracking().FirstOrDefault(c => c.Name == value.Name);
+			if (existingProjectOnDB != null) {
+				validationErrors.Add(new KeyValuePair<string, string>("Name", "project name already exist on db."));
 			}
 
 			if (validationErrors.Count > 0) {
@@ -25,8 +34,12 @@ public class ProjectService : IProjectService {
 			}
 
 			// persist
-			value.Id = Guid.NewGuid();
-			_projects.Add(value);
+			var project = value.ToEntity();
+			_db.Add(project);
+			_db.SaveChanges();
+
+			value = project.ToDto();
+
 			return new Result<ProjectDto>(value);
 		}
 		catch (Exception ex) {
@@ -35,6 +48,6 @@ public class ProjectService : IProjectService {
 	}
 
 	public List<ProjectDto> GetAll() {
-		return _projects;
+		return _db.Projects.AsNoTracking().ToList().ToDto();
 	}
 }
