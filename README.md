@@ -1,9 +1,12 @@
 # JixWebApi
 A simple preconfigured Web API template.
 
-## Refs
-https://craftbakery.dev/make-your-own-custom-netcore-template/
-https://www.mytechramblings.com/posts/create-dotnet-templates-for-visual-studio-part-1/
+ - Azure DevOps CI pipeline
+ - Core library
+ - Base Unit Tests
+ - EF Core (InMemoryDB)
+ - Logging
+ - API response wrapper
 
 ## Installing Template
 on root dir of solution
@@ -11,11 +14,12 @@ on root dir of solution
 dotnet new -u .
 dotnet new -i .
 ```
-
 Then use the template for new project using vs2022 or cli.
 ```
 dotnet new jixwebapi -n YourProjectName
 ```
 
 ## Configurations
----
+Todo
+
+@jicking
