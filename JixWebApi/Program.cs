@@ -1,4 +1,5 @@
 using AutoWrapper;
+using Azure.Identity;
 using JixWebApi.Core.Services;
 using JixWebApi.Data;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,15 @@ public class Program {
 			// NLog: Setup NLog for Dependency injection
 			builder.Logging.ClearProviders();
 			builder.Host.UseNLog();
+
+			// Azure KeyVault
+			var keyVaultName = builder.Configuration["AzureKeyVaultName"];
+			if (!string.IsNullOrEmpty(keyVaultName) && !builder.Environment.IsDevelopment()) {
+				logger.Info("Will use Azure Keyvault");
+				builder.Configuration.AddAzureKeyVault(
+					new Uri($"https://{keyVaultName}.vault.azure.net/"),
+					new DefaultAzureCredential());
+			}
 
 			// Swagger
 			builder.Services.AddSwaggerGen();
@@ -55,17 +65,16 @@ public class Program {
 			// Configure the HTTP request pipeline.
 			if (!app.Environment.IsDevelopment()) {
 				app.UseExceptionHandler("/Error");
-				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
 				app.UseHsts();
 			}
 
 			app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
-			//if (!app.Environment.IsProduction()) {
-			app.UseSwagger();
-			app.UseSwaggerUI();
-			//}
+			if (!app.Environment.IsProduction()) {
+				app.UseSwagger();
+				app.UseSwaggerUI();
+			}
 
 			app.UseRouting();
 			app.UseCors();
