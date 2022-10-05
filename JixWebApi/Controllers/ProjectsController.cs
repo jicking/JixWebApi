@@ -1,7 +1,6 @@
 using JixWebApi.Core.DTO;
 using JixWebApi.Core.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace JixWebApi.Controllers;
 
