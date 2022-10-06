@@ -81,7 +81,13 @@ public class Program {
 			app.UseAuthorization();
 			//app.UseAuthentication();
 			app.MapRazorPages();
-			app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions { IsApiOnly = false });
+			app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions {
+				IsApiOnly = false,
+				EnableResponseLogging = false,
+				IsDebug = false,
+				ShouldLogRequestData = false,
+				UseApiProblemDetailsException = true
+			});
 			app.MapControllers();
 
 			app.Run();

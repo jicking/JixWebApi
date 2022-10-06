@@ -1,3 +1,5 @@
+using AutoWrapper.Wrappers;
+using JixWebApi.Core;
 using JixWebApi.Core.DTO;
 using JixWebApi.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -26,29 +28,24 @@ public class ProjectsController : ControllerBase {
 
 	// POST api/<ProjectsController>
 	[HttpPost]
-	public async Task<IActionResult> PostAsync([FromBody] ProjectDto value) {
-		try {
-			// custom validation
+	public async Task<IActionResult> PostAsync([FromBody] CreateProjectDto value) {
+		// custom validation
 
-			var addResult = await _projectService.AddAsync(value);
+		var addResult = await _projectService.AddAsync(value.ToDto());
 
-			if (addResult.IsError) {
-				throw addResult.Exception;
-			}
-
-			if (addResult.HasValidationError) {
-				foreach (var e in addResult.ValidationErrors) {
-					ModelState.AddModelError(e.Key, e.Value);
-				}
-				return BadRequest(ModelState);
-			}
-
-			_logger.LogInformation("Added new project ");
-			return Ok(addResult.Value);
+		if (addResult.IsError) {
+			throw addResult.Exception;
 		}
-		catch (Exception ex) {
-			_logger.LogError(ex, "");
-			throw;
+
+		// throw validation error
+		if (addResult.HasValidationError) {
+			foreach (var e in addResult.ValidationErrors) {
+				ModelState.AddModelError(e.Key, e.Value);
+			}
+			throw new ApiProblemDetailsException(ModelState);
 		}
+
+		_logger.LogInformation("Added new project ");
+		return Ok(addResult.Value);
 	}
 }

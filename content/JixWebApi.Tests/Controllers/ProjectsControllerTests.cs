@@ -40,7 +40,10 @@ public class ProjectsControllerTests {
 
 	[Fact()]
 	public void PostTest() {
-		var project = DefaultValues.ProjectInput;
+		var project = new CreateProjectDto() {
+			Name = DefaultValues.ProjectInput.Name,
+			Description = DefaultValues.ProjectInput.Description
+		};
 		var result = (OkObjectResult)_sut.PostAsync(project).Result;
 		var value = (ProjectDto)result.Value;
 		Assert.Equal(project.Name, value.Name);

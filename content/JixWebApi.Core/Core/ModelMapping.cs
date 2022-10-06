@@ -4,6 +4,7 @@ using Mapster;
 
 namespace JixWebApi.Core;
 public static class ModelMapping {
+
 	public static ProjectDto ToDto(this Project model) {
 		if (model == null) return null;
 		return model.Adapt<ProjectDto>();
@@ -19,5 +20,10 @@ public static class ModelMapping {
 	public static Project ToEntity(this ProjectDto dto) {
 		if (dto == null) return null;
 		return dto.Adapt<Project>();
+	}
+
+	// map action dto (eg: create, update) if exists to dto
+	public static ProjectDto ToDto(this CreateProjectDto model) {
+		return model.Adapt<ProjectDto>();
 	}
 }
