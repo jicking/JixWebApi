@@ -11,12 +11,15 @@ namespace JixWebApi.Controllers;
 public class ProjectsController : ControllerBase {
 	private readonly ILogger<ProjectsController> _logger;
 	private readonly IProjectService _projectService;
+	private readonly IStorageService _storageService;
 
 	public ProjectsController(
 		ILogger<ProjectsController> logger,
-		IProjectService projectService) {
+		IProjectService projectService,
+		IStorageService storageService) {
 		_logger = logger;
 		_projectService = projectService;
+		_storageService = storageService;
 	}
 
 	// GET: api/<ProjectsController>
@@ -28,8 +31,13 @@ public class ProjectsController : ControllerBase {
 
 	// POST api/<ProjectsController>
 	[HttpPost]
-	public async Task<IActionResult> PostAsync([FromBody] CreateProjectDto value) {
+	public async Task<IActionResult> PostAsync([FromForm] CreateProjectDto value) {
 		// custom validation
+
+		// process file upload
+		if (value.Logo != null) {
+			var logoUrl = await _storageService.UploadFileDemoAsync(value.Logo, value.Name);
+		}
 
 		var addResult = await _projectService.AddAsync(value.ToDto());
 

@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Http;
+
 namespace JixWebApi.Core.DTO;
 
 public class ProjectDto {
@@ -10,4 +12,9 @@ public class ProjectDto {
 public class CreateProjectDto {
 	public string Name { get; set; }
 	public string Description { get; set; }
+
+	// Make sure you set your form enctype="multipart/form-data"
+	[MaxFileSize(2 * 1024 * 1024)]
+	[AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
+	public IFormFile Logo { get; set; }
 }

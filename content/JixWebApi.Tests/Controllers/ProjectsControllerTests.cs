@@ -3,6 +3,7 @@ using JixWebApi.Core;
 using JixWebApi.Core.DTO;
 using JixWebApi.Core.Services;
 using JixWebApi.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
@@ -18,6 +19,7 @@ public class ProjectsControllerTests {
 		// mock dependencies
 		var logger = NullLogger<ProjectsController>.Instance;
 		var projectService = Substitute.For<IProjectService>();
+		var storageService = Substitute.For<IStorageService>();
 
 		// mocks results
 		projectService
@@ -28,8 +30,11 @@ public class ProjectsControllerTests {
 		projectService
 			.AddAsync(Arg.Any<ProjectDto>())
 			.Returns(new Result<ProjectDto>(DefaultValues.ProjectInput));
+		storageService
+			.UploadFileDemoAsync(Arg.Any<IFormFile>(), Arg.Any<string>())
+			.Returns("file.jpg");
 
-		_sut = new ProjectsController(logger, projectService);
+		_sut = new ProjectsController(logger, projectService, storageService);
 	}
 
 	[Fact()]

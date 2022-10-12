@@ -57,8 +57,12 @@ public class Program {
 			builder.Services.AddEndpointsApiExplorer();
 
 			// Add custom Options
+			builder.Services.Configure<StorageServiceOptions>(
+				builder.Configuration.GetSection(StorageServiceOptions.SectionName));
+
 			// Add custom Services
 			builder.Services.AddScoped<IProjectService, ProjectService>();
+			builder.Services.AddScoped<IStorageService, StorageService>();
 
 			var app = builder.Build();
 
