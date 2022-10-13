@@ -29,6 +29,12 @@ public class Program {
 					new DefaultAzureCredential());
 			}
 
+			// App Insights
+			var appInsightsConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
+			if (string.IsNullOrEmpty(appInsightsConnectionString)) {
+				builder.Services.AddApplicationInsightsTelemetry();
+			}
+
 			// Swagger
 			builder.Services.AddSwaggerGen();
 
