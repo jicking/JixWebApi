@@ -1,5 +1,6 @@
 # JixWebApi
 A simple preconfigured Web API template.
+Intended for small web app projects.
 
  - Azure DevOps CI pipeline
  - Core library
@@ -7,6 +8,7 @@ A simple preconfigured Web API template.
  - EF Core (InMemoryDB)
  - Logging
  - API response wrapper
+ - Custom scaffold templates
 
 ## Installing Template
 on root dir of solution

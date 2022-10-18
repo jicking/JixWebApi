@@ -1,13 +1,16 @@
-@page
+﻿@page
 @model JixWebApi.Pages.Projects.EditModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Project</h4>
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="h2">Edit Project</h1>
+    <div>
+        <a asp-page="./Index" class="btn btn-outline-primary btn-sm">Back To List</a>
+    </div>
+</div>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -30,14 +33,35 @@
             </div>
             <input type="hidden" asp-for="Project.Id" />
             <div class="form-group">
+                <label asp-for="Project.Created" class="control-label"></label>
+                <input asp-for="Project.Created" class="form-control" />
+                <span asp-validation-for="Project.Created" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.CreatedBy" class="control-label"></label>
+                <input asp-for="Project.CreatedBy" class="form-control" />
+                <span asp-validation-for="Project.CreatedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Deleted" class="control-label"></label>
+                <input asp-for="Project.Deleted" class="form-control" />
+                <span asp-validation-for="Project.Deleted" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.DeletedBy" class="control-label"></label>
+                <input asp-for="Project.DeletedBy" class="form-control" />
+                <span asp-validation-for="Project.DeletedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Project.IsDeleted" /> @Html.DisplayNameFor(model => model.Project.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="./Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -30,4 +30,8 @@
     <ProjectReference Include="..\JixWebApi.Core\JixWebApi.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Templates\" />
+  </ItemGroup>
+
 </Project>

@@ -1,45 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using JixWebApi.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using JixWebApi.Core.Entities;
-using JixWebApi.Data;
 
-namespace JixWebApi.Pages.Projects
-{
-    public class CreateModel : PageModel
-    {
-        private readonly JixWebApi.Data.JixWebApiDbContext _context;
+namespace JixWebApi.Pages.Projects {
+	public class CreateModel : PageModel {
+		private readonly JixWebApi.Data.JixWebApiDbContext _context;
 
-        public CreateModel(JixWebApi.Data.JixWebApiDbContext context)
-        {
-            _context = context;
-        }
+		public CreateModel(JixWebApi.Data.JixWebApiDbContext context) {
+			_context = context;
+		}
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
+		public IActionResult OnGet() {
+			return Page();
+		}
 
-        [BindProperty]
-        public Project Project { get; set; }
-        
+		[BindProperty]
+		public Project Project { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
-        public async Task<IActionResult> OnPostAsync()
-        {
-          if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            _context.Projects.Add(Project);
-            await _context.SaveChangesAsync();
+		// To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+		public async Task<IActionResult> OnPostAsync() {
+			if (!ModelState.IsValid) {
+				return Page();
+			}
 
-            return RedirectToPage("./Index");
-        }
-    }
+			_context.Projects.Add(Project);
+			await _context.SaveChangesAsync();
+
+			return RedirectToPage("./Index");
+		}
+	}
 }
