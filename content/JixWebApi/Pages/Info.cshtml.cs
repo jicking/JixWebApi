@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace JixWebApi.Pages;
+namespace JixWebApp.Pages;
 
 public class InfoModel : PageModel {
 	public readonly IWebHostEnvironment WebHostEnv;

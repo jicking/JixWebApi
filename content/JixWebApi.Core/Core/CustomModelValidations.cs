@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace JixWebApi.Core;
+namespace JixWebApp.Core;
 
 public class MaxFileSizeAttribute : ValidationAttribute {
 	private readonly int _maxFileSize;

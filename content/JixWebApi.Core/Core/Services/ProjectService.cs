@@ -1,8 +1,8 @@
-using JixWebApi.Core.DTO;
-using JixWebApi.Data;
+using JixWebApp.Core.DTO;
+using JixWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace JixWebApi.Core.Services;
+namespace JixWebApp.Core.Services;
 
 public interface IProjectService {
 	Task<List<ProjectDto>> GetAllAsync();
@@ -11,10 +11,10 @@ public interface IProjectService {
 
 public class ProjectService : IProjectService {
 
-	private static JixWebApiDbContext _db;
+	private static JixWebAppDbContext _db;
 
 	public ProjectService(
-		JixWebApiDbContext dbContext
+		JixWebAppDbContext dbContext
 		) {
 		_db = dbContext;
 	}

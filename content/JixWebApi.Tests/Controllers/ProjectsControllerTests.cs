@@ -1,15 +1,15 @@
-using JixWebApi.Controllers;
-using JixWebApi.Core;
-using JixWebApi.Core.DTO;
-using JixWebApi.Core.Services;
-using JixWebApi.Data;
+using JixWebApp.Core;
+using JixWebApp.Controllers;
+using JixWebApp.Core.DTO;
+using JixWebApp.Core.Services;
+using JixWebApp.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
 using NSubstitute;
 using Xunit;
 
-namespace JixWebApi.Tests.Controllers;
+namespace JixWebApp.Tests.Controllers;
 
 public class ProjectsControllerTests {
 	private readonly ProjectsController _sut;

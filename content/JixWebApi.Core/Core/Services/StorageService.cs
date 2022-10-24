@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace JixWebApi.Core.Services;
+namespace JixWebApp.Core.Services;
 
 public interface IStorageService {
 	Task<string> UploadFileAsync(IFormFile file, string containerName, string fileName);
@@ -12,8 +12,8 @@ public interface IStorageService {
 
 public class StorageServiceOptions {
 	public const string SectionName = "AzureBlobStorage";
-	public string ConnectionString { get; set; } = String.Empty;
-	public string ContainerName { get; set; } = String.Empty;
+	public string ConnectionString { get; set; } = string.Empty;
+	public string ContainerName { get; set; } = string.Empty;
 }
 
 public class StorageService : IStorageService {

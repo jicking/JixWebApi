@@ -2,10 +2,10 @@
   "$schema": "http://json.schemastore.org/template",
   "author": "jicking",
   "classifications": [ "Web", "WebAPI" ],
-  "identity": "JixWebApiSln",
-  "name": "Jix Web API Sln",
-  "shortName": "jixwebapi",
-  "sourceName": "JixWebApi",
+  "identity": "JixWebAppSln",
+  "name": "JixWebAppSln",
+  "shortName": "JixWebAppSln",
+  "sourceName": "JixWebApp",
   "preferNameDirectory": true,
   "tags": {
     "language": "C#",
@@ -18,7 +18,7 @@
   ],
   "primaryOutputs": [
     {
-      "path": "JixWebApi.sln"
+      "path": "JixWebApp.sln"
     }
   ]
 }

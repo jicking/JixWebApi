@@ -1,4 +1,4 @@
-namespace JixWebApi.Core.Entities;
+namespace JixWebApp.Core.Entities;
 
 
 public interface IEntityHistory<T> {

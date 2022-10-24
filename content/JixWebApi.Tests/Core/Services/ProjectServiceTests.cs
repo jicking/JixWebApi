@@ -1,10 +1,10 @@
-using JixWebApi.Core.DTO;
-using JixWebApi.Core.Services;
-using JixWebApi.Data;
+using JixWebApp.Core.DTO;
+using JixWebApp.Core.Services;
+using JixWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
-namespace JixWebApi.Tests.Core.Services;
+namespace JixWebApp.Tests.Core.Services;
 
 public class ProjectServiceTests {
 
@@ -15,11 +15,11 @@ public class ProjectServiceTests {
 		// mock dependencies
 
 		//Set EF
-		var options = new DbContextOptionsBuilder<JixWebApiDbContext>()
-			.UseInMemoryDatabase("JixWebApiDbContext")
+		var options = new DbContextOptionsBuilder<JixWebAppDbContext>()
+			.UseInMemoryDatabase("JixWebAppDbContext")
 			.Options;
 
-		var context = new JixWebApiDbContext(options);
+		var context = new JixWebAppDbContext(options);
 
 		_sut = new ProjectService(context);
 	}

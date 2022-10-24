@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\JixWebApi.Core\JixWebApi.Core.csproj" />
-    <ProjectReference Include="..\JixWebApi\JixWebApi.csproj" />
+    <ProjectReference Include="..\JixWebApi.Core\JixWebApp.Core.csproj" />
+    <ProjectReference Include="..\JixWebApi\JixWebApp.csproj" />
   </ItemGroup>
 
 </Project>

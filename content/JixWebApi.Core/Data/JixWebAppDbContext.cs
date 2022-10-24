@@ -1,10 +1,10 @@
-using JixWebApi.Core.Entities;
+using JixWebApp.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace JixWebApi.Data;
+namespace JixWebApp.Data;
 
-public class JixWebApiDbContext : DbContext {
-	public JixWebApiDbContext(DbContextOptions<JixWebApiDbContext> options)
+public class JixWebAppDbContext : DbContext {
+	public JixWebAppDbContext(DbContextOptions<JixWebAppDbContext> options)
 		: base(options) {
 	}
 

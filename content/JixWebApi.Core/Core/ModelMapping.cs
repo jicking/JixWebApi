@@ -1,8 +1,8 @@
-using JixWebApi.Core.DTO;
-using JixWebApi.Core.Entities;
+using JixWebApp.Core.DTO;
+using JixWebApp.Core.Entities;
 using Mapster;
 
-namespace JixWebApi.Core;
+namespace JixWebApp.Core;
 public static class ModelMapping {
 
 	public static ProjectDto ToDto(this Project model) {

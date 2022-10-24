@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["JixWebApi/JixWebApi.csproj", "JixWebApi/"]
-RUN dotnet restore "JixWebApi/JixWebApi.csproj"
+COPY ["JixWebApp/JixWebApp.csproj", "JixWebApp/"]
+RUN dotnet restore "JixWebApp/JixWebApp.csproj"
 COPY . .
-WORKDIR "/src/JixWebApi"
-RUN dotnet build "JixWebApi.csproj" -c Release -o /app/build
+WORKDIR "/src/JixWebApp"
+RUN dotnet build "JixWebApp.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "JixWebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "JixWebApp.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "JixWebApi.dll"]
+ENTRYPOINT ["dotnet", "JixWebApp.dll"]

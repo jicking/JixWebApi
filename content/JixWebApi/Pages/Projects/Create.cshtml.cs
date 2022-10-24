@@ -1,12 +1,13 @@
-﻿using JixWebApi.Core.Entities;
+using JixWebApp.Core.Entities;
+using JixWebApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace JixWebApi.Pages.Projects {
+namespace JixWebApp.Pages.Projects {
 	public class CreateModel : PageModel {
-		private readonly JixWebApi.Data.JixWebApiDbContext _context;
+		private readonly JixWebAppDbContext _context;
 
-		public CreateModel(JixWebApi.Data.JixWebApiDbContext context) {
+		public CreateModel(JixWebAppDbContext context) {
 			_context = context;
 		}
 

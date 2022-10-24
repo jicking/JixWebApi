@@ -1,4 +1,4 @@
-# JixWebApi
+# JixWebApp
 A simple preconfigured Web API template.
 Intended for small web app projects.
 
@@ -18,7 +18,7 @@ dotnet new -i .
 ```
 Then use the template for new project using vs2022 or cli.
 ```
-dotnet new jixwebapi -n YourProjectName
+dotnet new JixWebApp -n YourProjectName
 ```
 
 ## Configurations

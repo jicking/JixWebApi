@@ -1,4 +1,4 @@
-namespace JixWebApi.Core;
+namespace JixWebApp.Core;
 
 public class Result<T> {
 	public bool IsSuccess { get; set; }

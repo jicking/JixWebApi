@@ -1,6 +1,7 @@
+using JixWebApp.Core;
 using Microsoft.AspNetCore.Http;
 
-namespace JixWebApi.Core.DTO;
+namespace JixWebApp.Core.DTO;
 
 public class ProjectDto {
 	public Guid Id { get; set; }

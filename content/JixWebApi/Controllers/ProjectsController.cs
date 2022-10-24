@@ -1,10 +1,10 @@
 using AutoWrapper.Wrappers;
-using JixWebApi.Core;
-using JixWebApi.Core.DTO;
-using JixWebApi.Core.Services;
+using JixWebApp.Core;
+using JixWebApp.Core.DTO;
+using JixWebApp.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace JixWebApi.Controllers;
+namespace JixWebApp.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

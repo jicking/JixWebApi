@@ -1,17 +1,17 @@
 using AutoWrapper;
 using Azure.Identity;
-using JixWebApi.Core.Services;
-using JixWebApi.Data;
+using JixWebApp.Core.Services;
+using JixWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
 
-namespace JixWebApi;
+namespace JixWebApp;
 public class Program {
 	public static void Main(string[] args) {
 
-		var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
-		logger.Debug("Init main JixWebAPI =================");
+		var logger = LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
+		logger.Debug("Init main JixWebApp =================");
 
 		try {
 			var builder = WebApplication.CreateBuilder(args);
@@ -51,11 +51,11 @@ public class Program {
 			// Auth
 
 			// Data
-			//var connectionString = builder.Configuration.GetConnectionString("JixWebApiDbContext");
-			//builder.Services.AddDbContext<JixWebApiDbContext>(options =>
+			//var connectionString = builder.Configuration.GetConnectionString("JixWebAppDbContext");
+			//builder.Services.AddDbContext<JixWebAppDbContext>(options =>
 			//	options.UseSqlServer(connectionString));
-			builder.Services.AddDbContext<JixWebApiDbContext>(options =>
-				options.UseInMemoryDatabase("JixWebApiDbContext"));
+			builder.Services.AddDbContext<JixWebAppDbContext>(options =>
+				options.UseInMemoryDatabase("JixWebAppDbContext"));
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
@@ -104,12 +104,12 @@ public class Program {
 		}
 		catch (Exception exception) {
 			// NLog: catch setup errors
-			logger.Error(exception, "Stopped JixWebAPI because of exception =================");
+			logger.Error(exception, "Stopped JixWebApp because of exception =================");
 			throw;
 		}
 		finally {
 			// Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
-			NLog.LogManager.Shutdown();
+			LogManager.Shutdown();
 		}
 	}
 }

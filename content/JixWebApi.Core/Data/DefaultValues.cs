@@ -1,7 +1,7 @@
-using JixWebApi.Core.DTO;
-using JixWebApi.Core.Entities;
+using JixWebApp.Core.DTO;
+using JixWebApp.Core.Entities;
 
-namespace JixWebApi.Data;
+namespace JixWebApp.Data;
 
 public static class DefaultValues {
 	public static ProjectDto ProjectInput = new ProjectDto() {
