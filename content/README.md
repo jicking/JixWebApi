@@ -21,7 +21,20 @@ Then use the template for new project using vs2022 or cli.
 dotnet new JixWebApp -n YourProjectName
 ```
 
+## Running app in local dev machine
+Open project in vs2022 then run app.
+
 ## Configurations
-Todo
+By default all azure related configs are left blank, on local please ovewrite them using local secrets.
+By default app uses inmemory db for easier prototyping, switch to sql when needed (you need to disable JixWebAppDbContextFactory as well).
+
+## Architecture
+JixWebApp.Core contains members that are intended to be unit tested and segrated away from the startup web project.
+By design project defined Services encapsulates process logic and is then exposed via web api or razor page.
+
+## My use case
+For my use case , i scaffold pages and api using enties for prototyping.
+I then create an entity service to encapsulate process logic with unit tests.
+
 
 @jicking
