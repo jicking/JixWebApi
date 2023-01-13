@@ -1,7 +1,9 @@
 using AutoWrapper.Wrappers;
+using JixWebApp.App.Queries;
 using JixWebApp.Core;
 using JixWebApp.Core.DTO;
 using JixWebApp.Core.Services;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JixWebApp.Controllers;
@@ -12,21 +14,31 @@ public class ProjectsController : ControllerBase {
 	private readonly ILogger<ProjectsController> _logger;
 	private readonly IProjectService _projectService;
 	private readonly IStorageService _storageService;
+	private readonly IMediator _mediator;
 
 	public ProjectsController(
 		ILogger<ProjectsController> logger,
 		IProjectService projectService,
-		IStorageService storageService) {
+		IStorageService storageService,
+		IMediator mediator) {
 		_logger = logger;
 		_projectService = projectService;
 		_storageService = storageService;
+		_mediator = mediator;
 	}
 
 	// GET: api/<ProjectsController>
 	[HttpGet]
 	public async Task<IEnumerable<ProjectDto>> GetAsync() {
-		_logger.LogInformation("Fetch all projects");
-		return await _projectService.GetAllAsync();
+		try {
+			_logger.LogInformation("Fetch all projects");
+			var data = await _mediator.Send(new GetAllProjectsQuery());
+			return data;
+		}
+		catch (Exception ex) {
+			_logger.LogError(ex, "");
+			throw;
+		}
 	}
 
 	// POST api/<ProjectsController>

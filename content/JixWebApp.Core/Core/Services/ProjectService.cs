@@ -48,7 +48,10 @@ public class ProjectService : IProjectService {
 	}
 
 	public async Task<List<ProjectDto>> GetAllAsync() {
-		var data = await _db.Projects.AsNoTracking().ToListAsync();
+		var data = await _db.Projects
+			.AsNoTracking()
+			.Where(p => !p.IsDeleted)
+			.ToListAsync();
 		return data.ToDto();
 	}
 }

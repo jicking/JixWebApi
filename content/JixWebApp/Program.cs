@@ -2,6 +2,7 @@ using AutoWrapper;
 using Azure.Identity;
 using JixWebApp.Core.Services;
 using JixWebApp.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using NLog.Web;
@@ -69,6 +70,10 @@ public class Program {
 			// Add custom Services
 			builder.Services.AddScoped<IProjectService, ProjectService>();
 			builder.Services.AddScoped<IStorageService, StorageService>();
+
+			// MediatR
+			//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+			builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 			var app = builder.Build();
 
