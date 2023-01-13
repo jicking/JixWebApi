@@ -1,4 +1,5 @@
 using AutoWrapper.Wrappers;
+using JixWebApp.App.Commands;
 using JixWebApp.App.Queries;
 using JixWebApp.Core;
 using JixWebApp.Core.DTO;
@@ -12,17 +13,14 @@ namespace JixWebApp.Controllers;
 [ApiController]
 public class ProjectsController : ControllerBase {
 	private readonly ILogger<ProjectsController> _logger;
-	private readonly IProjectService _projectService;
 	private readonly IStorageService _storageService;
 	private readonly IMediator _mediator;
 
 	public ProjectsController(
 		ILogger<ProjectsController> logger,
-		IProjectService projectService,
 		IStorageService storageService,
 		IMediator mediator) {
 		_logger = logger;
-		_projectService = projectService;
 		_storageService = storageService;
 		_mediator = mediator;
 	}
@@ -51,7 +49,7 @@ public class ProjectsController : ControllerBase {
 			var logoUrl = await _storageService.UploadFileDemoAsync(value.Logo, value.Name);
 		}
 
-		var addResult = await _projectService.AddAsync(value.ToDto());
+		var addResult = await _mediator.Send(new AddProjectCommand() { Project = value.ToDto() });
 
 		if (addResult.IsError) {
 			throw addResult.Exception;

@@ -1,4 +1,3 @@
-using AutoWrapper;
 using Azure.Identity;
 using JixWebApp.Data;
 using JixWebApp.Services;
@@ -20,6 +19,7 @@ public class Program {
 			// NLog: Setup NLog for Dependency injection
 			builder.Logging.ClearProviders();
 			builder.Host.UseNLog();
+			builder.Services.AddApplicationInsightsTelemetry();
 
 			// Azure KeyVault
 			var keyVaultName = builder.Configuration["AzureKeyVaultName"];
@@ -28,12 +28,6 @@ public class Program {
 				builder.Configuration.AddAzureKeyVault(
 					new Uri($"https://{keyVaultName}.vault.azure.net/"),
 					new DefaultAzureCredential());
-			}
-
-			// App Insights
-			var appInsightsConnectionString = builder.Configuration["ApplicationInsights:ConnectionString"];
-			if (string.IsNullOrEmpty(appInsightsConnectionString)) {
-				builder.Services.AddApplicationInsightsTelemetry();
 			}
 
 			// Swagger
@@ -68,11 +62,9 @@ public class Program {
 				builder.Configuration.GetSection(StorageServiceOptions.SectionName));
 
 			// Add custom Services
-			builder.Services.AddScoped<IProjectService, ProjectService>();
 			builder.Services.AddScoped<IStorageService, StorageService>();
 
 			// MediatR
-			//builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 			builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 			var app = builder.Build();
@@ -80,9 +72,7 @@ public class Program {
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
-			}
-
-			if (!app.Environment.IsDevelopment()) {
+			} else {
 				app.UseExceptionHandler("/Error");
 				app.UseHsts();
 			}
@@ -97,16 +87,9 @@ public class Program {
 
 			app.UseRouting();
 			app.UseCors();
-			app.UseAuthorization();
-			//app.UseAuthentication();
+			// app.UseAuthorization();
+			// app.UseAuthentication();
 			app.MapRazorPages();
-			//app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions {
-			//	IsApiOnly = false,
-			//	EnableResponseLogging = false,
-			//	IsDebug = false,
-			//	ShouldLogRequestData = false,
-			//	UseApiProblemDetailsException = true
-			//});
 			app.MapControllers();
 
 			app.Run();
