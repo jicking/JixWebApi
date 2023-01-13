@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		azure-pipelines.yml = azure-pipelines.yml
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
+		TODO.md = TODO.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JixWebApp.Core", "JixWebApp.Core\JixWebApp.Core.csproj", "{22E3DE97-4281-4881-8F5D-22B4DE8B6574}"
