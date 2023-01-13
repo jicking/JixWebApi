@@ -1,29 +1,26 @@
+using JixWebApp.Core;
 using JixWebApp.Core.DTO;
 using JixWebApp.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace JixWebApp.Core.Services;
-
-public interface IProjectService {
-	Task<List<ProjectDto>> GetAllAsync();
-	Task<Result<ProjectDto>> AddAsync(ProjectDto value);
+namespace JixWebApp.App.Commands;
+public sealed record AddProjectCommand : IRequest<Result<ProjectDto>> {
+	public ProjectDto Project { get; set; }
 }
 
-public class ProjectService : IProjectService {
+public class AddProjectCommandHandler : IRequestHandler<AddProjectCommand, Result<ProjectDto>> {
+	private readonly JixWebAppDbContext _db;
 
-	private static JixWebAppDbContext _db;
-
-	public ProjectService(
-		JixWebAppDbContext dbContext
-		) {
-		_db = dbContext;
+	public AddProjectCommandHandler(JixWebAppDbContext dbContext) {
+		this._db = dbContext;
 	}
 
-	public async Task<Result<ProjectDto>> AddAsync(ProjectDto value) {
-
+	public async Task<Result<ProjectDto>> Handle(AddProjectCommand request, CancellationToken cancellationToken) {
 		try {
 			// validation
 			var validationErrors = new List<KeyValuePair<string, string>>();
+			var value = request.Project;
 			var existingProjectOnDB = await _db.Projects.AsNoTracking().FirstOrDefaultAsync(c => c.Name == value.Name);
 			if (existingProjectOnDB != null) {
 				validationErrors.Add(new KeyValuePair<string, string>("Name", "project name already exist on db."));
@@ -45,10 +42,5 @@ public class ProjectService : IProjectService {
 		catch (Exception ex) {
 			return new Result<ProjectDto>(ex);
 		}
-	}
-
-	public async Task<List<ProjectDto>> GetAllAsync() {
-		var data = await _db.Projects.AsNoTracking().ToListAsync();
-		return data.ToDto();
 	}
 }

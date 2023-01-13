@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace JixWebApp.Core.Services;
+namespace JixWebApp.Services;
 
 public interface IStorageService {
 	Task<string> UploadFileAsync(IFormFile file, string containerName, string fileName);

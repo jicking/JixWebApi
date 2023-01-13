@@ -1,8 +1,11 @@
-using JixWebApp.Core;
+using JixWebApp.App.Commands;
+using JixWebApp.App.Queries;
 using JixWebApp.Controllers;
+using JixWebApp.Core;
 using JixWebApp.Core.DTO;
-using JixWebApp.Core.Services;
 using JixWebApp.Data;
+using JixWebApp.Services;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -18,23 +21,23 @@ public class ProjectsControllerTests {
 		// setup
 		// mock dependencies
 		var logger = NullLogger<ProjectsController>.Instance;
-		var projectService = Substitute.For<IProjectService>();
 		var storageService = Substitute.For<IStorageService>();
+		var mediator = Substitute.For<IMediator>();
 
 		// mocks results
-		projectService
-			.GetAllAsync()
-			.Returns(new List<ProjectDto>() {
-				DefaultValues.ProjectInput
-			});
-		projectService
-			.AddAsync(Arg.Any<ProjectDto>())
-			.Returns(new Result<ProjectDto>(DefaultValues.ProjectInput));
 		storageService
 			.UploadFileDemoAsync(Arg.Any<IFormFile>(), Arg.Any<string>())
 			.Returns("file.jpg");
+		mediator
+			.Send(Arg.Any<GetAllProjectsQuery>())
+			.Returns(new List<ProjectDto>() {
+				DefaultValues.ProjectInput
+			});
+		mediator
+			.Send(Arg.Any<AddProjectCommand>())
+			.Returns(new Result<ProjectDto>(DefaultValues.ProjectInput));
 
-		_sut = new ProjectsController(logger, projectService, storageService);
+		_sut = new ProjectsController(logger, storageService, mediator);
 	}
 
 	[Fact()]
