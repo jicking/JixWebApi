@@ -1,8 +1,9 @@
+using JixWebApp.Core;
 using JixWebApp.Core.DTO;
 using JixWebApp.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace JixWebApp.Core.Services;
+namespace JixWebApp.Services;
 
 public interface IProjectService {
 	Task<List<ProjectDto>> GetAllAsync();

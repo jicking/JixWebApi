@@ -1,7 +1,7 @@
 using AutoWrapper;
 using Azure.Identity;
-using JixWebApp.Core.Services;
 using JixWebApp.Data;
+using JixWebApp.Services;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using NLog;
@@ -100,13 +100,13 @@ public class Program {
 			app.UseAuthorization();
 			//app.UseAuthentication();
 			app.MapRazorPages();
-			app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions {
-				IsApiOnly = false,
-				EnableResponseLogging = false,
-				IsDebug = false,
-				ShouldLogRequestData = false,
-				UseApiProblemDetailsException = true
-			});
+			//app.UseApiResponseAndExceptionWrapper(new AutoWrapperOptions {
+			//	IsApiOnly = false,
+			//	EnableResponseLogging = false,
+			//	IsDebug = false,
+			//	ShouldLogRequestData = false,
+			//	UseApiProblemDetailsException = true
+			//});
 			app.MapControllers();
 
 			app.Run();

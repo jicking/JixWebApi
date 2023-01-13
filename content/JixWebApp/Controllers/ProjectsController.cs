@@ -2,7 +2,7 @@ using AutoWrapper.Wrappers;
 using JixWebApp.App.Queries;
 using JixWebApp.Core;
 using JixWebApp.Core.DTO;
-using JixWebApp.Core.Services;
+using JixWebApp.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

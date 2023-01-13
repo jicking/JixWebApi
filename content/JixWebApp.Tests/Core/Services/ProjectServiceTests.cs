@@ -1,6 +1,6 @@
 using JixWebApp.Core.DTO;
-using JixWebApp.Core.Services;
 using JixWebApp.Data;
+using JixWebApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
