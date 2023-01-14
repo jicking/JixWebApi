@@ -14,6 +14,8 @@ public abstract class BaseEntity : IEntityHistory<string> {
 
 	public DateTimeOffset? Created { get; set; }
 	public string CreatedBy { get; set; }
+	public DateTimeOffset? LastUpdated { get; set; }
+	public string LastUpdatedBy { get; set; }
 	public DateTimeOffset? Deleted { get; set; }
 	public string DeletedBy { get; set; }
 	public bool IsDeleted { get; set; }

@@ -9,8 +9,6 @@ public class JixWebAppDbContextFactory : IDesignTimeDbContextFactory<JixWebAppDb
 	JixWebAppDbContext IDesignTimeDbContextFactory<JixWebAppDbContext>.CreateDbContext(string[] args) {
 		var optionsBuilder = new DbContextOptionsBuilder<JixWebAppDbContext>();
 		optionsBuilder.UseInMemoryDatabase("JixWebAppDb");
-		//optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=JixWebAppDb;Trusted_Connection=True;MultipleActiveResultSets=true");
-
 		return new JixWebAppDbContext(optionsBuilder.Options);
 	}
 }

@@ -72,7 +72,8 @@ public class Program {
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment()) {
 				app.UseDeveloperExceptionPage();
-			} else {
+			}
+			else {
 				app.UseExceptionHandler("/Error");
 				app.UseHsts();
 			}

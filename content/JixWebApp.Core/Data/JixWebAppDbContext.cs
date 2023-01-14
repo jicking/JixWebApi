@@ -35,19 +35,22 @@ public class JixWebAppDbContext : DbContext {
 				case EntityState.Added:
 					entry.Entity.Created = DateTimeOffset.Now;
 					break;
-
-					//case EntityState.Modified:
-					//	entry.Entity.LastUpdatedOn = DateTimeOffset.Now;
-					//	break;
+				case EntityState.Modified:
+					entry.Entity.LastUpdated = DateTimeOffset.Now;
+					break;
 			}
 		}
 	}
 
+	/// <summary>
+	/// Call only when using in memory db
+	/// to prevent duplicate data (when default values are set on migration)
+	/// </summary>
 	public void SeedInMemoryDb() {
 		if (Projects.Any())
 			return;
 
-		Projects.AddRange(DefaultValues.Projects);
+		Projects.AddRange(DefaultValues.TestProjects);
 		SaveChanges();
 	}
 }
