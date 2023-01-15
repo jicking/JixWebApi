@@ -1,6 +1,6 @@
-using JixWebApp.Core.Entities;
 using JixWebApp.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
 
 namespace JixWebApp.App.Queries.Tests;
@@ -9,26 +9,18 @@ public class GetAllProjectsQueryHandlerTests {
 	private readonly GetAllProjectsQueryHandler _sut;
 
 	public GetAllProjectsQueryHandlerTests() {
-		// setup
-		// mock dependencies
+		//	Setup
+		//	Mock dependencies
+		var logger = NullLogger<GetAllProjectsQueryHandler>.Instance;
 
-		//Set EF
+		//	Set EF
 		var options = new DbContextOptionsBuilder<JixWebAppDbContext>()
-			.UseInMemoryDatabase("JixWebAppDbContext")
+			.UseInMemoryDatabase(Guid.NewGuid().ToString())
 			.Options;
-
 		var context = new JixWebAppDbContext(options);
+		context.SeedTestData();
 
-		// seed
-		// TODO: Better to seed test scenarios in db init
-		var project = new Project() {
-			Name = "GetAllTest",
-			Description = "GetAllTest"
-		};
-		context.Projects.Add(project);
-		context.SaveChanges();
-
-		_sut = new GetAllProjectsQueryHandler(context);
+		_sut = new GetAllProjectsQueryHandler(context, logger);
 	}
 
 	[Fact()]

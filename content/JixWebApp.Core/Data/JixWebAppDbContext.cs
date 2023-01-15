@@ -11,7 +11,7 @@ public class JixWebAppDbContext : DbContext {
 	public DbSet<Project> Projects { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
-		// Seed data but will be part of migration
+		// Seed data and will be part of migration (default values eg: zipcodes, )
 		//modelBuilder.Entity<Project>().HasData(DefaultValues.Projects);
 
 		// Will exclude deleted objects from default query
@@ -35,19 +35,22 @@ public class JixWebAppDbContext : DbContext {
 				case EntityState.Added:
 					entry.Entity.Created = DateTimeOffset.Now;
 					break;
-
-					//case EntityState.Modified:
-					//	entry.Entity.LastUpdatedOn = DateTimeOffset.Now;
-					//	break;
+				case EntityState.Modified:
+					entry.Entity.LastUpdated = DateTimeOffset.Now;
+					break;
 			}
 		}
 	}
 
-	public void SeedInMemoryDb() {
+	/// <summary>
+	/// Call only when using in memory db
+	/// to prevent duplicate data (when default values are set on migration)
+	/// </summary>
+	public void SeedTestData() {
 		if (Projects.Any())
 			return;
 
-		Projects.AddRange(DefaultValues.Projects);
+		Projects.AddRange(DefaultValues.TestProjects);
 		SaveChanges();
 	}
 }

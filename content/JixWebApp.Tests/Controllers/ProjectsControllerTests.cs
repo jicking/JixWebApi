@@ -31,11 +31,11 @@ public class ProjectsControllerTests {
 		mediator
 			.Send(Arg.Any<GetAllProjectsQuery>())
 			.Returns(new List<ProjectDto>() {
-				DefaultValues.ProjectInput
+				DefaultValues.TestProjectDto
 			});
 		mediator
 			.Send(Arg.Any<AddProjectCommand>())
-			.Returns(new Result<ProjectDto>(DefaultValues.ProjectInput));
+			.Returns(new Result<ProjectDto>(DefaultValues.TestProjectDto));
 
 		_sut = new ProjectsController(logger, storageService, mediator);
 	}
@@ -49,8 +49,8 @@ public class ProjectsControllerTests {
 	[Fact()]
 	public void PostTest() {
 		var project = new CreateProjectDto() {
-			Name = DefaultValues.ProjectInput.Name,
-			Description = DefaultValues.ProjectInput.Description
+			Name = DefaultValues.TestProjectDto.Name,
+			Description = DefaultValues.TestProjectDto.Description
 		};
 		var result = (OkObjectResult)_sut.PostAsync(project).Result;
 		var value = (ProjectDto)result.Value;

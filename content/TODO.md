@@ -1,7 +1,1 @@
-- Seed data for tests (unit & E2E) that works both inmemoryDB and Sql
-- Cleanup razor pages templates
-- Add vue petite sample to razor pages templates
-- Add AZAD for auth
-- remove unused packages
-- use new project GUID when creating from this sln template
-- note required sensitive config to set on local secrets
+- 
