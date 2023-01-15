@@ -11,7 +11,7 @@ public class JixWebAppDbContext : DbContext {
 	public DbSet<Project> Projects { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder) {
-		// Seed data but will be part of migration
+		// Seed data and will be part of migration (default values eg: zipcodes, )
 		//modelBuilder.Entity<Project>().HasData(DefaultValues.Projects);
 
 		// Will exclude deleted objects from default query
@@ -46,7 +46,7 @@ public class JixWebAppDbContext : DbContext {
 	/// Call only when using in memory db
 	/// to prevent duplicate data (when default values are set on migration)
 	/// </summary>
-	public void SeedInMemoryDb() {
+	public void SeedTestData() {
 		if (Projects.Any())
 			return;
 

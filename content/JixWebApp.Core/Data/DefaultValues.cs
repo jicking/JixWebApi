@@ -32,4 +32,13 @@ public static class DefaultValues {
 	};
 
 	// Default Values ...
+	public static Guid ProjectId = Guid.NewGuid();
+
+	public static List<Project> Projects = new List<Project> {
+		new Project() {
+			Id = ProjectId,
+			Name = "Demo Project",
+			Description = "Demo Project"
+		}
+	};
 }

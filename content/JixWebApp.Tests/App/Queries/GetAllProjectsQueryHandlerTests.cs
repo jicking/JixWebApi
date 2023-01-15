@@ -15,7 +15,7 @@ public class GetAllProjectsQueryHandlerTests {
 			.UseInMemoryDatabase("JixWebAppDbContext")
 			.Options;
 		var context = new JixWebAppDbContext(options);
-		context.SeedInMemoryDb();
+		context.SeedTestData();
 
 		_sut = new GetAllProjectsQueryHandler(context);
 	}

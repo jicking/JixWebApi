@@ -15,7 +15,7 @@ public class AddProjectCommandHandlerTest {
 			.Options;
 
 		var context = new JixWebAppDbContext(options);
-		context.SeedInMemoryDb();
+		context.SeedTestData();
 
 		_sut = new AddProjectCommandHandler(context);
 	}

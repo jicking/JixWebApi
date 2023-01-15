@@ -1,3 +1,4 @@
+using AutoWrapper.Extensions;
 using Azure.Identity;
 using JixWebApp.Data;
 using JixWebApp.Services;
@@ -46,11 +47,15 @@ public class Program {
 			// Auth
 
 			// Data
-			//var connectionString = builder.Configuration.GetConnectionString("JixWebAppDbContext");
-			//builder.Services.AddDbContext<JixWebAppDbContext>(options =>
-			//	options.UseSqlServer(connectionString));
-			builder.Services.AddDbContext<JixWebAppDbContext>(options =>
-				options.UseInMemoryDatabase("JixWebAppDbContext"));
+			bool useInmemoryDb = builder.Configuration["UseInmemoryDb"].ToBoolean();
+			if (useInmemoryDb) {
+				builder.Services.AddDbContext<JixWebAppDbContext>(options =>
+					options.UseInMemoryDatabase("JixWebAppDbContext"));
+			} else {
+				var connectionString = builder.Configuration.GetConnectionString("JixWebAppDbContext");
+				builder.Services.AddDbContext<JixWebAppDbContext>(options =>
+					options.UseSqlServer(connectionString));
+			}
 
 			// Add services to the container.
 			builder.Services.AddRazorPages();
@@ -68,6 +73,12 @@ public class Program {
 			builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
 			var app = builder.Build();
+
+			// Seed test data for inmemory db only.
+			if (useInmemoryDb) {
+				using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+				serviceScope.ServiceProvider.GetService<JixWebAppDbContext>().SeedTestData();
+			}
 
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment()) {
