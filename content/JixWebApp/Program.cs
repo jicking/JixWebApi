@@ -51,7 +51,8 @@ public class Program {
 			if (useInmemoryDb) {
 				builder.Services.AddDbContext<JixWebAppDbContext>(options =>
 					options.UseInMemoryDatabase("JixWebAppDbContext"));
-			} else {
+			}
+			else {
 				var connectionString = builder.Configuration.GetConnectionString("JixWebAppDbContext");
 				builder.Services.AddDbContext<JixWebAppDbContext>(options =>
 					options.UseSqlServer(connectionString));
