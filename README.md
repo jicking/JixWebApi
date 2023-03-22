@@ -2,10 +2,10 @@
 A simple preconfigured Web API template.
 Intended for small web app projects.
 
- - Azure DevOps CI pipeline
+ - Github Actions Build pipeline/CI
  - Core library
  - Base Unit Tests
- - EF Core (InMemoryDB)
+ - Data Persistence (InMemoryDB EF Core)
  - Logging
  - API response wrapper
  - Custom scaffold templates
@@ -22,7 +22,7 @@ dotnet new JixWebApp -n YourProjectName
 ```
 
 ## Running app in local dev machine
-Open project in vs2022 then run app.
+Open './content/JixWebApp.sln' to open project in vs2022, then run startup app.
 
 ## Configurations
 By default all azure related configs are left blank, on local please ovewrite them using local secrets.
@@ -30,11 +30,11 @@ By default app uses inmemory db for easier prototyping, switch to sql when neede
 
 ## Architecture
 JixWebApp.Core contains members that are intended to be unit tested and segrated away from the startup web project.
-By design project defined Services encapsulates process logic and is then exposed via web api or razor page.
+By design, project defined Command/Query encapsulates process logic and is then exposed via web api or razor page.
 
 ## My use case
 For my use case , i scaffold pages and api using enties for prototyping.
-I then create an entity service to encapsulate process logic with unit tests.
+I then create a command or query to encapsulate process logic with unit tests.
 
 
 @jicking
